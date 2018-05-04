@@ -4,10 +4,10 @@ Red Hat Corporate Profile for Certified Cloud Providers (RH CCP)
 Ansible remediation role for profile rht-ccp  
 Profile Title:  Red Hat Corporate Profile for Certified Cloud Providers (RH CCP)  
 Profile Description:  
-This is a *draft* SCAP profile for Red Hat Certified Cloud Providers.  
+This profile contains the minimum security relevant \n \ configuration settings recommended by Red Hat, Inc for \n \ Red Hat Enterprise Linux 7 instances deployed by Red Hat Certified \n \ Cloud Providers.  
   
 Benchmark ID:  RHEL-7  
-Benchmark Version:  0.1.38  
+Benchmark Version:  0.1.39  
   
 XCCDF Version:  1.1  
   
