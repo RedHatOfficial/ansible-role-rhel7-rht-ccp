@@ -11,3 +11,6 @@ install:
 
 script:
   - molecule test --scenario-name docker
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
