@@ -42,13 +42,13 @@ N/A
 Example Playbook
 ----------------
 
-Run `ansible-galaxy install Ansible-Security-Compliance.rhel7-role-rht-ccp` to
+Run `ansible-galaxy install RedHatOfficial.rhel7-role-rht-ccp` to
 download and install the role. Then you can use the following playbook snippet.
 
 
     - hosts: all
       roles:
-         - { role: Ansible-Security-Compliance.rhel7-role-rht-ccp }
+         - { role: RedHatOfficial.rhel7-role-rht-ccp }
 
 
 Then first check the playbook using (on the localhost):
