@@ -3,4 +3,4 @@
   connection: local
   become: true
   roles:
-    - rhel7-role-rht-ccp
+    - ansible-role-rhel7-rht-ccp

@@ -1,10 +1,10 @@
 galaxy_info:
   role_name: rhel7_rht_ccp
-  author: SCAP Security Guide development team
+  author: ComplianceAsCode development team
   description: Red Hat Corporate Profile for Certified Cloud Providers (RH CCP)
   company: "Red Hat, Inc."
 
-  issue_tracker_url: https://github.com/complianceascode/content/issues
+  issue_tracker_url: https://github.com/ComplianceAsCode/content/issues
 
   license: BSD-3-Clause
 
