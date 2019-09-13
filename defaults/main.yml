@@ -85,7 +85,6 @@ set_password_hashing_algorithm_logindefs: true
 skip_ansible_lint: true
 sshd_allow_only_protocol2: true
 sshd_disable_empty_passwords: true
-sshd_disable_rhosts: true
 sshd_disable_root_login: true
 sshd_do_not_permit_user_env: true
 sshd_enable_warning_banner: true
