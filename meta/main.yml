@@ -2,7 +2,6 @@ galaxy_info:
   role_name: rhel7_rht_ccp
   author: ComplianceAsCode development team
   description: Red Hat Corporate Profile for Certified Cloud Providers (RH CCP)
-  company: "Red Hat, Inc."
 
   issue_tracker_url: https://github.com/ComplianceAsCode/content/issues
 
@@ -24,9 +23,10 @@ galaxy_info:
   - security
   - compliance
   - complianceascode
-  - ccp
-  - rhccp
   - redhatofficial
   - redhat
+  - rhel7
+  - rhtccp
+
 
 dependencies: []
