@@ -1,11 +1,8 @@
-# Red Hat Corporate Profile for Certified Cloud Providers (RH CCP)
+Red Hat Corporate Profile for Certified Cloud Providers (RH CCP)
+=========
 
-[![Build Status](https://travis-ci.org/RedHatOfficial/ansible-role-rhel7-rht-ccp.svg?branch=master)](https://travis-ci.org/RedHatOfficial/ansible-role-rhel7-rht-ccp)
-[![Ansible Role](https://img.shields.io/ansible/role/39707.svg)](https://galaxy.ansible.com/RedHatOfficial/rhel7_rht_ccp)
-[![GitHub release](https://img.shields.io/github/release/RedHatOfficial/ansible-role-rhel7-rht-ccp.svg)](https://github.com/RedHatOfficial/ansible-role-rhel7-rht-ccp/releases/latest)
-
-Ansible Role for Red Hat Corporate Profile for Certified Cloud Providers (RH CCP)
-
+Ansible Role for Red Hat Corporate Profile for Certified Cloud Providers (RH CCP)  
+  
 Profile Description:  
 This profile contains the minimum security relevant  
 configuration settings recommended by Red Hat, Inc for  
@@ -15,22 +12,26 @@ Cloud Providers.
 The tasks that are used in this role are generated using OpenSCAP.
 See the OpenSCAP project for more details on Ansible playbook generation at [https://github.com/OpenSCAP/openscap](https://github.com/OpenSCAP/openscap)
 
-To submit a fix or enhancement for an Ansible task that is failing or missing,
+To submit a fix or enhancement for an Ansible task that is failing or missing in this role,
 see the ComplianceAsCode project at [https://github.com/ComplianceAsCode/content](https://github.com/ComplianceAsCode/content)
 
-## Requirements
+Requirements
+------------
 
 - Ansible version 2.5 or higher
 
-## Role Variables
+Role Variables
+--------------
 
-To customize the role to your liking, check out the [list of variables](vars/main.yml).
+To customize the role to your liking, check out the [list of variables](defaults/main.yml).
 
-## Dependencies
+Dependencies
+------------
 
 N/A
 
-## Example Playbook
+Example Role Usage
+----------------
 
 Run `ansible-galaxy install RedHatOfficial.rhel7_rht_ccp` to
 download and install the role. Then, you can use the following playbook snippet to run the Ansible role:
@@ -47,11 +48,13 @@ To deploy it, use (this may change configuration of your local machine!):
 
     ansible-playbook -i "localhost," -c local playbook.yml
 
-## License
+License
+-------
 
 BSD-3-Clause
 
-## Author Information
+Author Information
+------------------
 
 This Ansible remediation role has been generated from the body of security
 policies developed by the ComplianceAsCode project. Please see
