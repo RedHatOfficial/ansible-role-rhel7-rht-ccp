@@ -61,7 +61,7 @@ jobs:
         run: molecule destroy --driver-name docker --scenario-name default
 
       - name: Run Molecule tests.
-        run: molecule test --scenario-name default
+        run: molecule -vvv test --scenario-name default
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
