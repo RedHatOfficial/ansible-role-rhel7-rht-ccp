@@ -57,6 +57,9 @@ jobs:
       - name: Install test dependencies.
         run: pip3 install ansible molecule[docker] docker
 
+      - name: Destroy existing molecule
+        run: molecule destroy --driver-name docker --scenario-name default
+
       - name: Run Molecule tests.
         run: molecule test --scenario-name default
         env:
