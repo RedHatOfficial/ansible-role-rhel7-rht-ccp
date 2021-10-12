@@ -3,17 +3,17 @@
   hosts: all
   gather_facts: true
   become: true
-  vars:
-    ensure_redhat_gpgkey_installed: false
-    disable_strategy: false
-    disable_host_auth: false
-    ansible_virtualization_type: "docker"
-
-  tasks:
-
-    - name: Show facts
-      debug:
-        var: ansible_virtualization_type
+#  vars:
+#    ensure_redhat_gpgkey_installed: false
+#    disable_strategy: false
+#    disable_host_auth: false
+#    ansible_virtualization_type: "docker"
+#
+#  tasks:
+#
+#    - name: Show facts
+#      debug:
+#        var: ansible_virtualization_type
 
   roles:
     - role: redhatofficial.rhel7_rht_ccp
