@@ -4,13 +4,13 @@ services:
   - docker
 
 language: python
-python: "3.6"
+python: "3.8"
 
 install:
-  - pip install ansible molecule[docker] docker
+- pip install ansible==2.9.5 molecule[docker] docker
 
 script:
-  - molecule test --scenario-name default
+- molecule test --scenario-name default
 
 notifications:
-  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+webhooks: https://galaxy.ansible.com/api/v1/notifications/
