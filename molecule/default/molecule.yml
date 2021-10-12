@@ -25,3 +25,16 @@ provisioner:
       remote_tmp: /tmp/
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+scenario:
+  name: default
+  test_sequence:
+    - lint
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+#    - idempotence
+    - cleanup
+    - destroy
