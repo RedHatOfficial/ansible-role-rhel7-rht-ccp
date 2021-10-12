@@ -3,10 +3,10 @@
   hosts: all
   gather_facts: true
   become: true
-#  vars:
-#    ensure_redhat_gpgkey_installed: false
-#    disable_strategy: false
-#    disable_host_auth: false
+  vars:
+    ensure_redhat_gpgkey_installed: false
+    disable_strategy: false
+    disable_host_auth: false
 #    ansible_virtualization_type: "docker"
 #
 #  tasks:
