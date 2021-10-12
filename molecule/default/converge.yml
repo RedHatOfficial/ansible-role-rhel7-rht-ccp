@@ -7,13 +7,14 @@
     ensure_redhat_gpgkey_installed: false
     disable_strategy: false
     disable_host_auth: false
-#    ansible_virtualization_type: "docker"
-#
-#  tasks:
-#
-#    - name: Show facts
-#      debug:
-#        var: ansible_virtualization_type
+    sshd_disable_empty_passwords: false
+    sshd_set_keepalive: false
+    sshd_set_idle_timeout: false
+    sshd_enable_warning_banner: false
+    sshd_allow_only_protocol2: false
+    sshd_do_not_permit_user_env: false
+    sshd_use_approved_ciphers: false
+    sshd_disable_root_login: false
 
   roles:
     - role: redhatofficial.rhel7_rht_ccp
