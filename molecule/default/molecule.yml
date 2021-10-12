@@ -5,7 +5,8 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: centos:8
+    #image: centos:8
+    image: quay.io/danclark/molecule:python-38
     #image: docker.io/geerlingguy/docker-centos7-ansible
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
