@@ -19,8 +19,8 @@ platforms:
 provisioner:
   name: ansible
   config_options:
-  defaults:
-    local_tmp: /tmp/
-    remote_tmp: /tmp/
+    defaults:
+      local_tmp: /tmp/
+      remote_tmp: /tmp/
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
