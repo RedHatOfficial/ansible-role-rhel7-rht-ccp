@@ -9,11 +9,18 @@ platforms:
     image: quay.io/danclark/molecule:python-38
     #image: docker.io/geerlingguy/docker-centos7-ansible
     command: ${MOLECULE_DOCKER_COMMAND:-""}
+    tmpfs:
+      - /run
+      - /tmp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
     pre_build_image: true
 provisioner:
   name: ansible
+  config_options:
+  defaults:
+    local_tmp: /tmp/
+    remote_tmp: /tmp/
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
