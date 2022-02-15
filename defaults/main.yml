@@ -92,4 +92,3 @@ sshd_enable_warning_banner: true
 sshd_set_idle_timeout: true
 sshd_set_keepalive_0: true
 sshd_use_approved_ciphers: true
-unknown_strategy: true
