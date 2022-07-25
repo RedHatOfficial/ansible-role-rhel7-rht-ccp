@@ -3298,7 +3298,7 @@
   - restrict_strategy
 
 - name: Find /lib/ file(s) recursively
-  command: find -H /lib/  -perm /u+s,g+ws,o+wt -type f -regex "^.*$"
+  command: find -H /lib/  -perm /g+w,o+w -type f -regex "^.*$"
   register: files_found
   changed_when: false
   failed_when: false
@@ -3326,7 +3326,7 @@
 - name: Set permissions for /lib/ file(s)
   file:
     path: '{{ item }}'
-    mode: u-s,g-ws,o-wt
+    mode: g-w,o-w
     state: file
   with_items:
   - '{{ files_found.stdout_lines }}'
@@ -3351,7 +3351,7 @@
   - no_reboot_needed | bool
 
 - name: Find /lib64/ file(s) recursively
-  command: find -H /lib64/  -perm /u+s,g+ws,o+wt -type f -regex "^.*$"
+  command: find -H /lib64/  -perm /g+w,o+w -type f -regex "^.*$"
   register: files_found
   changed_when: false
   failed_when: false
@@ -3379,7 +3379,7 @@
 - name: Set permissions for /lib64/ file(s)
   file:
     path: '{{ item }}'
-    mode: u-s,g-ws,o-wt
+    mode: g-w,o-w
     state: file
   with_items:
   - '{{ files_found.stdout_lines }}'
@@ -3404,7 +3404,7 @@
   - no_reboot_needed | bool
 
 - name: Find /usr/lib/ file(s) recursively
-  command: find -H /usr/lib/  -perm /u+s,g+ws,o+wt -type f -regex "^.*$"
+  command: find -H /usr/lib/  -perm /g+w,o+w -type f -regex "^.*$"
   register: files_found
   changed_when: false
   failed_when: false
@@ -3432,7 +3432,7 @@
 - name: Set permissions for /usr/lib/ file(s)
   file:
     path: '{{ item }}'
-    mode: u-s,g-ws,o-wt
+    mode: g-w,o-w
     state: file
   with_items:
   - '{{ files_found.stdout_lines }}'
@@ -3457,7 +3457,7 @@
   - no_reboot_needed | bool
 
 - name: Find /usr/lib64/ file(s) recursively
-  command: find -H /usr/lib64/  -perm /u+s,g+ws,o+wt -type f -regex "^.*$"
+  command: find -H /usr/lib64/  -perm /g+w,o+w -type f -regex "^.*$"
   register: files_found
   changed_when: false
   failed_when: false
@@ -3485,7 +3485,7 @@
 - name: Set permissions for /usr/lib64/ file(s)
   file:
     path: '{{ item }}'
-    mode: u-s,g-ws,o-wt
+    mode: g-w,o-w
     state: file
   with_items:
   - '{{ files_found.stdout_lines }}'
