@@ -535,7 +535,7 @@
     - name: Limit Password Reuse - Ensure the required PAM module line is included in {{ pam_file_path }}
       ansible.builtin.lineinfile:
         dest: '{{ pam_file_path }}'
-        insertafter: ^password.*requisite.*pam_pwquality.so
+        insertafter: ^password.*requisite.*pam_pwquality\.so
         line: password    requisite    pam_pwhistory.so
       register: result_pam_module_add
       when:
@@ -543,9 +543,10 @@
     - name: Limit Password Reuse - Ensure authselect changes are applied
       ansible.builtin.command:
         cmd: authselect apply-changes -b
-      when:
-      - result_authselect_present.stat.exists
-      - (result_pam_module_add is defined and result_pam_module_add.changed) or (result_pam_module_edit is defined and result_pam_module_edit.changed)
+      when: 'result_authselect_present is defined and result_authselect_present.stat.exists and ((result_pam_module_add is
+        defined and result_pam_module_add.changed) or (result_pam_module_edit is defined and result_pam_module_edit.changed))
+
+        '
     when:
     - result_pam_line_present.found is defined
     - result_pam_line_present.found == 0
@@ -772,7 +773,7 @@
     - name: Limit Password Reuse - Ensure the required PAM module line is included in {{ pam_file_path }}
       ansible.builtin.lineinfile:
         dest: '{{ pam_file_path }}'
-        insertafter: ^password.*requisite.*pam_pwquality.so
+        insertafter: ^password.*requisite.*pam_pwquality\.so
         line: password    requisite    pam_pwhistory.so
       register: result_pam_module_add
       when:
@@ -780,9 +781,10 @@
     - name: Limit Password Reuse - Ensure authselect changes are applied
       ansible.builtin.command:
         cmd: authselect apply-changes -b
-      when:
-      - result_authselect_present.stat.exists
-      - (result_pam_module_add is defined and result_pam_module_add.changed) or (result_pam_module_edit is defined and result_pam_module_edit.changed)
+      when: 'result_authselect_present is defined and result_authselect_present.stat.exists and ((result_pam_module_add is
+        defined and result_pam_module_add.changed) or (result_pam_module_edit is defined and result_pam_module_edit.changed))
+
+        '
     when:
     - result_pam_line_present.found is defined
     - result_pam_line_present.found == 0
@@ -968,7 +970,7 @@
   - name: Lock Accounts After Failed Password Attempts - Check if pam_faillock.so is already enabled
     ansible.builtin.lineinfile:
       path: /etc/pam.d/system-auth
-      regexp: .*auth.*pam_faillock.so (preauth|authfail)
+      regexp: .*auth.*pam_faillock\.so (preauth|authfail)
       state: absent
     check_mode: true
     changed_when: false
@@ -977,7 +979,7 @@
     ansible.builtin.lineinfile:
       path: '{{ item }}'
       line: auth        required      pam_faillock.so preauth
-      insertbefore: ^auth.*sufficient.*pam_unix.so.*
+      insertbefore: ^auth.*sufficient.*pam_unix\.so.*
       state: present
     loop:
     - /etc/pam.d/system-auth
@@ -988,7 +990,7 @@
     ansible.builtin.lineinfile:
       path: '{{ item }}'
       line: auth        required      pam_faillock.so authfail
-      insertbefore: ^auth.*required.*pam_deny.so.*
+      insertbefore: ^auth.*required.*pam_deny\.so.*
       state: present
     loop:
     - /etc/pam.d/system-auth
@@ -999,7 +1001,7 @@
     ansible.builtin.lineinfile:
       path: '{{ item }}'
       line: account     required      pam_faillock.so
-      insertbefore: ^account.*required.*pam_unix.so.*
+      insertbefore: ^account.*required.*pam_unix\.so.*
       state: present
     loop:
     - /etc/pam.d/system-auth
@@ -1387,7 +1389,7 @@
       files
     ansible.builtin.lineinfile:
       path: /etc/pam.d/system-auth
-      regexp: .*auth.*pam_faillock.so (preauth|authfail).*deny
+      regexp: .*auth.*pam_faillock\.so (preauth|authfail).*deny
       state: absent
     check_mode: true
     changed_when: false
@@ -1773,7 +1775,7 @@
       PAM module line is included in /etc/pam.d/system-auth
     ansible.builtin.lineinfile:
       dest: /etc/pam.d/system-auth
-      insertafter: ^account.*required.*pam_permit.so
+      insertafter: ^\s*account
       line: password    requisite    pam_pwquality.so
     register: result_pam_module_add
     when:
@@ -1782,9 +1784,10 @@
       changes are applied
     ansible.builtin.command:
       cmd: authselect apply-changes -b
-    when:
-    - result_authselect_present.stat.exists
-    - (result_pam_module_add is defined and result_pam_module_add.changed) or (result_pam_module_edit is defined and result_pam_module_edit.changed)
+    when: 'result_authselect_present is defined and result_authselect_present.stat.exists and ((result_pam_module_add is defined
+      and result_pam_module_add.changed) or (result_pam_module_edit is defined and result_pam_module_edit.changed))
+
+      '
   when:
   - DISA_STIG_RHEL_07_010119 | bool
   - accounts_password_pam_retry | bool
@@ -2286,9 +2289,10 @@
     - name: Set PAM's Password Hashing Algorithm - Ensure authselect changes are applied
       ansible.builtin.command:
         cmd: authselect apply-changes -b
-      when:
-      - result_authselect_present.stat.exists
-      - (result_pam_module_add is defined and result_pam_module_add.changed) or (result_pam_module_edit is defined and result_pam_module_edit.changed)
+      when: 'result_authselect_present is defined and result_authselect_present.stat.exists and ((result_pam_module_add is
+        defined and result_pam_module_add.changed) or (result_pam_module_edit is defined and result_pam_module_edit.changed))
+
+        '
     when:
     - result_pam_line_present.found is defined
     - result_pam_line_present.found == 0
@@ -2665,6 +2669,30 @@
   - no_reboot_needed
   - restrict_strategy
 
+- name: Gather the package facts
+  package_facts:
+    manager: auto
+  tags:
+  - CCE-82023-3
+  - CJIS-5.5.2.2
+  - NIST-800-171-3.4.5
+  - NIST-800-53-AC-6(1)
+  - NIST-800-53-CM-6(a)
+  - PCI-DSS-Req-7.1
+  - configure_strategy
+  - file_groupowner_grub2_cfg
+  - low_complexity
+  - low_disruption
+  - medium_severity
+  - no_reboot_needed
+  when:
+  - configure_strategy | bool
+  - file_groupowner_grub2_cfg | bool
+  - low_complexity | bool
+  - low_disruption | bool
+  - medium_severity | bool
+  - no_reboot_needed | bool
+
 - name: Test for existence /boot/grub2/grub.cfg
   stat:
     path: /boot/grub2/grub.cfg
@@ -2676,6 +2704,8 @@
   - low_disruption | bool
   - medium_severity | bool
   - no_reboot_needed | bool
+  - '"/boot/efi" not in ansible_mounts | map(attribute="mount") | list'
+  - '"grub2-common" in ansible_facts.packages'
   - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
   tags:
   - CCE-82023-3
@@ -2702,6 +2732,8 @@
   - low_disruption | bool
   - medium_severity | bool
   - no_reboot_needed | bool
+  - '"/boot/efi" not in ansible_mounts | map(attribute="mount") | list'
+  - '"grub2-common" in ansible_facts.packages'
   - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
   - file_exists.stat is defined and file_exists.stat.exists
   tags:
@@ -2718,6 +2750,30 @@
   - medium_severity
   - no_reboot_needed
 
+- name: Gather the package facts
+  package_facts:
+    manager: auto
+  tags:
+  - CCE-82026-6
+  - CJIS-5.5.2.2
+  - NIST-800-171-3.4.5
+  - NIST-800-53-AC-6(1)
+  - NIST-800-53-CM-6(a)
+  - PCI-DSS-Req-7.1
+  - configure_strategy
+  - file_owner_grub2_cfg
+  - low_complexity
+  - low_disruption
+  - medium_severity
+  - no_reboot_needed
+  when:
+  - configure_strategy | bool
+  - file_owner_grub2_cfg | bool
+  - low_complexity | bool
+  - low_disruption | bool
+  - medium_severity | bool
+  - no_reboot_needed | bool
+
 - name: Test for existence /boot/grub2/grub.cfg
   stat:
     path: /boot/grub2/grub.cfg
@@ -2729,6 +2785,8 @@
   - low_disruption | bool
   - medium_severity | bool
   - no_reboot_needed | bool
+  - '"/boot/efi" not in ansible_mounts | map(attribute="mount") | list'
+  - '"grub2-common" in ansible_facts.packages'
   - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
   tags:
   - CCE-82026-6
@@ -2755,6 +2813,8 @@
   - low_disruption | bool
   - medium_severity | bool
   - no_reboot_needed | bool
+  - '"/boot/efi" not in ansible_mounts | map(attribute="mount") | list'
+  - '"grub2-common" in ansible_facts.packages'
   - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
   - file_exists.stat is defined and file_exists.stat.exists
   tags:
@@ -2771,6 +2831,28 @@
   - medium_severity
   - no_reboot_needed
 
+- name: Gather the package facts
+  package_facts:
+    manager: auto
+  tags:
+  - CCE-82039-9
+  - NIST-800-171-3.4.5
+  - NIST-800-53-AC-6(1)
+  - NIST-800-53-CM-6(a)
+  - configure_strategy
+  - file_permissions_grub2_cfg
+  - low_complexity
+  - low_disruption
+  - medium_severity
+  - no_reboot_needed
+  when:
+  - configure_strategy | bool
+  - file_permissions_grub2_cfg | bool
+  - low_complexity | bool
+  - low_disruption | bool
+  - medium_severity | bool
+  - no_reboot_needed | bool
+
 - name: Test for existence /boot/grub2/grub.cfg
   stat:
     path: /boot/grub2/grub.cfg
@@ -2782,6 +2864,8 @@
   - low_disruption | bool
   - medium_severity | bool
   - no_reboot_needed | bool
+  - '"/boot/efi" not in ansible_mounts | map(attribute="mount") | list'
+  - '"grub2-common" in ansible_facts.packages'
   - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
   tags:
   - CCE-82039-9
@@ -2806,6 +2890,8 @@
   - low_disruption | bool
   - medium_severity | bool
   - no_reboot_needed | bool
+  - '"/boot/efi" not in ansible_mounts | map(attribute="mount") | list'
+  - '"grub2-common" in ansible_facts.packages'
   - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
   - file_exists.stat is defined and file_exists.stat.exists
   tags:
