@@ -46,6 +46,7 @@ DISA_STIG_RHEL_07_040340: true
 DISA_STIG_RHEL_07_040370: true
 DISA_STIG_RHEL_07_040390: true
 DISA_STIG_RHEL_07_040520: true
+DISA_STIG_RHEL_07_910055: true
 accounts_minimum_age_login_defs: true
 accounts_no_uid_except_zero: true
 accounts_password_pam_dcredit: true
@@ -83,6 +84,7 @@ file_permissions_etc_passwd: true
 file_permissions_etc_shadow: true
 file_permissions_grub2_cfg: true
 file_permissions_library_dirs: true
+file_permissions_var_log_audit: true
 firewalld_sshd_port_enabled: true
 high_disruption: true
 high_severity: true
