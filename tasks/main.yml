@@ -3353,7 +3353,7 @@
   lineinfile:
     create: true
     dest: /etc/modprobe.d/dccp.conf
-    regexp: dccp
+    regexp: install\s+dccp
     line: install dccp /bin/true
   when:
   - DISA_STIG_RHEL_07_020101 | bool
@@ -3415,7 +3415,7 @@
   lineinfile:
     create: true
     dest: /etc/modprobe.d/sctp.conf
-    regexp: sctp
+    regexp: install\s+sctp
     line: install sctp /bin/true
   when:
   - disable_strategy | bool
@@ -4310,7 +4310,8 @@
   - no_reboot_needed | bool
 
 - name: Read list of world and group writable system executables
-  command: find /bin /usr/bin /usr/local/bin /sbin /usr/sbin /usr/local/sbin /usr/libexec -perm /022 -type f
+  ansible.builtin.command: find /bin /usr/bin /usr/local/bin /sbin /usr/sbin /usr/local/sbin /usr/libexec -perm /022 -type
+    f
   register: world_writable_library_files
   changed_when: false
   failed_when: false
@@ -4336,9 +4337,10 @@
   - restrict_strategy | bool
 
 - name: Remove world/group writability of system executables
-  file:
+  ansible.builtin.file:
     path: '{{ item }}'
     mode: go-w
+    state: file
   with_items: '{{ world_writable_library_files.stdout_lines }}'
   when:
   - file_permissions_binary_dirs | bool
